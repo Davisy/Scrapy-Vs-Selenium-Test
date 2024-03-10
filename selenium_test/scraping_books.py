@@ -4,7 +4,7 @@ from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 
 import time
-import resource
+
 
 start_time = time.time()
 
@@ -52,15 +52,11 @@ driver.quit()
 # Calculate scraping duration
 scraping_duration = time.time() - start_time
 
-# Get memory usage
-memory_usage = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / (
-    1024 * 1024
-)  # Convert to MB
+
 
 # Save scraped data to CSV
 df = pd.DataFrame(books_results)
 df.to_csv("books_data.csv", index=False)
 
-# Print scraping duration and memory usage
+# Print scraping duration
 print(f"Scraping duration: {scraping_duration} seconds")
-print(f"Memory used: {memory_usage} MB")
