@@ -4,7 +4,6 @@ from scrapy import signals
 from scrapy.crawler import CrawlerProcess
 from scrapy.signalmanager import dispatcher
 import time
-import resource
 
 
 class BooksSpider(scrapy.Spider):
@@ -48,8 +47,6 @@ books_data, scraping_duration = book_spider_result()
 df = pd.DataFrame(books_data)
 df.to_csv("books_data.csv", index=False)
 
-memory_usage = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / (
-    1024 * 1024
-)  # Convert to MB
+
 print(f"Scraping duration: {scraping_duration} seconds")
-print(f"Memory used: {memory_usage} MB")
+
